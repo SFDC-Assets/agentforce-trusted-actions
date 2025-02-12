@@ -117,11 +117,19 @@ This project adds a new flow `Get Customer Details by Messaging Session`that ret
 
 #### Flow Details
 
-The Messaging Session has to be linked with an authorized session (AuthSession).
-It checks if the Messaging Session has an Auth Session linked and if yes, it returns the linked Contact.
+The flow checks if the Messaging Session has an Auth Session linked and if yes, it returns the linked Contact.
 If the Auth Session is missing, it updates the Messaging Session with the AuthRequestTime and returns an external link as URL to an authentication form - passing the current Session Key as URL parameter.
+Please modify the flow constant `SITE_URL` and set your URL from your org (like `https://orgfarm-60873dacf4-dev-ed.develop.my.site.com/coralcloud`)
+![Edit SITE URL flow constant](/images/get_customer_details_by_messaging_session_site_url.png)
 
 #### Add new Agent Action
 
 Deactivate your CC Service Agent and remove `Get Customer Details` from the topic.
 (Hint: Use Activate button to confirm the removal of the action if you have trouble with the Save option).
+
+Add a new flow action using `Get Customer Details by Messaging Session` with Input `messagingSessionId` marked as **Require Input** and Outputs `authenticationURL`, `contact` and `status` marked as **Show in conversation**
+
+The new action will show a URL link to a login protected page on your Experience Cloud.
+![Agent Authentication URL](/images/cc_service_agent_authenticate_url.png)
+
+## Agentforce Authenticator
