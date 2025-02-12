@@ -208,7 +208,7 @@
         <name>textURL</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text
-    >{!SITE_URL}/s/agentauthenticator?sessionKey={!Get_Messaging_Session.SessionKey}</text>
+    >{!SITE_URL}/agentauthenticator?sessionKey={!Get_Messaging_Session.SessionKey}</text>
     </textTemplates>
     <variables>
         <description
