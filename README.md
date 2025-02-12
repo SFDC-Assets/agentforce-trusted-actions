@@ -156,6 +156,6 @@ Click Publish in the upper right corner.
 - `Show me available sessions for tomorrow`
 - `Book two seats`
 
-When the agent tries to call a Private Action (with a Contact record required), it shows the URL to the login protected Agent Authenticator page. Once teh user (Sofia) has successfully authenticated, the agent conversation can continue. This time the Contact will be retrieved because the Messaging Session has been updated.
+When the agent tries to call a Private Action (with a Contact record required), it shows the URL to the login protected Agent Authenticator page. Once the user (Sofia) has successfully authenticated, the agent conversation can continue. This time the Contact will be retrieved because the Messaging Session has been updated.
 
 ![View the Agent as a Customer](/images/view_agent_as_customer.png)
