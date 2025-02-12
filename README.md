@@ -24,6 +24,8 @@ After you have successfully completed your Quick Start project, additional setup
 
 1. Reset password for Sofia - note her users credentials (username and password)
 
+1. Make sure you have enabled **Allow guest users to access public APIs.** in **Workspaces > Administration > Preferences**
+
 #### Additional Setup Steps - metadata deployment
 
 1. Clone this repository:
@@ -145,3 +147,15 @@ In **Experience Builder** add a new **Standard Page > New Blank Page** and name 
 Add a flow component to the new page and change the settings to Flow = `Authenticate Agentforce Service Agent` and sessionKey = `{!sessionKey}`
 
 ![AgentAuthenticator settings](/images/agent_authenticator.png)
+
+Click Publish in the upper right corner.
+
+# View the Agent as a Customer (Sofia Rodriguez)
+
+- `Can you let me know about the Underground Cave Exploration?`
+- `Show me available sessions for tomorrow`
+- `Book two seats`
+
+When the agent tries to call a Private Action (with a Contact record required), it shows the URL to the login protected Agent Authenticator page. Once teh user (Sofia) has successfully authenticated, the agent conversation can continue. This time the Contact will be retrieved because the Messaging Session has been updated.
+
+![View the Agent as a Customer](/images/view_agent_as_customer.png)
