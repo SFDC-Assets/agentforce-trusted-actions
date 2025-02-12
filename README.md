@@ -10,7 +10,7 @@ See [Maintain Trust with Agentforce Actions](https://help.salesforce.com/s/artic
 
 #### Environment
 
-Complete [Quick Start: Build Your First Agent with Agentforce](https://trailhead.salesforce.com/content/learn/projects/quick-start-build-your-first-agent-with-agentforce) on Trailhead to create a Custom Agentforce Playground containing the Coral Cloud Resorts app including a Agentforce Service Agent and Experience Cloud.
+Complete [Quick Start: Build Your First Agent with Agentforce](https://trailhead.salesforce.com/content/learn/projects/quick-start-build-your-first-agent-with-agentforce) on Trailhead to create a Custom Agentforce Playground containing the Coral Cloud Resorts app including Agentforce Service Agent and Experience Cloud.
 
 For more details about Coral Cloud Resorts. see [The Coral Cloud Resorts app](https://github.com/trailheadapps/coral-cloud) from Trailhead Apps.
 
@@ -66,12 +66,12 @@ Require the requester’s identity to be confirmed through authentication or thr
 
 # Example Implementation using Experience Cloud as IDP
 
-The Coral Cloud Resorts CC Service Agent identifies customers like Sofia Rodriguez by her email address and membership number using the Flow action `Get Customer Details`.
+The Coral Cloud Resorts CC Service Agent identifies customers like _Sofia Rodriguez_ by her email address and membership number using the Flow action `Get Customer Details`.
 
 This instruction shows how to change from user identification by email and membership number to identification by authenticated users.
 
 In this example the user is directed to a portal page where they will authenticate as external user via a login screen. A screen flow _Agentforce Authenticator_ is shown and after completion it will update the MessagingSession record for the Agentforce session with the user's identity. It will not however generate an event in the Agentforce session so it is dependent on the user continuing the conversation in Agentforce, once authentication is complete.
-![Example Implementation .](/images/service_agentforce_flow_chart.png)
+![Example Implementation](/images/service_agentforce_flow_chart.png)
 
 ## Use Case
 
@@ -81,32 +81,47 @@ In this example the user is directed to a portal page where they will authentica
 
 ## Topic Setup
 
-Customize topic **Experience Management**
+Customize topic **Experience Management** and replace the following two instructions:
 
-Replace this instruction (or optionally remove):
+1. Replace:
 
 ```
-If the customer is not known, always ask for their email address and get their Contact record before running any other actions.`
+If the customer is not known, you must always ask for their email address and their membership number to get their Contact record by running the action 'Get Customer Details' before running any other actions.
 ```
 
 With this:
 
 ```
-If the customer is not known, call the action 'Identify Customer by Messaging Session'.`
+If the customer is not known, call the action 'Get Customer Details by Messaging Session'.
+```
+
+1. Replace:
+
+```
+If asked to recommend experiences that a user might be interested in, use the 'Generate Personalized Schedule' Action to generate a schedule based on a contacts interests. Use the contact record from 'Get Customer Details' and pass it into the Contact input.
+```
+
+With this:
+
+```
+If asked to recommend experiences that a user might be interested in, use the 'Generate Personalized Schedule' Action to generate a schedule based on a contacts interests. Use the contact record from 'Get Customer Details by Messaging Session' and pass it into the Contact input.
 ```
 
 ## Get Customer Details
 
 The default implementation of **Get Customer Details** is a flow that retrieves a Contact record by email and membership number.
-![Get Customer Details V1](/images/get_customer_details_v1.png)
+![Get Customer Details](/images/get_customer_details.png)
 
-Replace this flow with a new version that retrieves the contact related to an authorized external user.
+This project adds a new flow `Get Customer Details by Messaging Session`that retrieves the contact related to an authorized external user.
+![Get Customer Details by Messaging Session](/images/get_customer_details_by_messaging_session.png)
 
-Check Authentication Status using the Custom AuthSessionId on Messaging Session
+#### Flow Details
 
-The Messaging Session needs to be linked with an authorized session (AuthSession).
-The custom action `Identify Customer By Email` is replaced with a new action named `Identify Customer By Messaging Session`.
+The Messaging Session has to be linked with an authorized session (AuthSession).
 It checks if the Messaging Session has an Auth Session linked and if yes, it returns the linked Contact.
 If the Auth Session is missing, it updates the Messaging Session with the AuthRequestTime and returns an external link as URL to an authentication form - passing the current Session Key as URL parameter.
 
-This repository contains a custom flow implementation that can be added as a new Agent Action.
+#### Add new Agent Action
+
+Deactivate your CC Service Agent and remove `Get Customer Details` from the topic.
+(Hint: Use Activate button to confirm the removal of the action if you have trouble with the Save option).
