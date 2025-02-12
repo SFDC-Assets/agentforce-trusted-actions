@@ -14,7 +14,7 @@ Complete [Quick Start: Build Your First Agent with Agentforce](https://trailhead
 
 For more details about Coral Cloud Resorts. see [The Coral Cloud Resorts app](https://github.com/trailheadapps/coral-cloud) from Trailhead Apps.
 
-#### Additional Setup Steps
+#### Additional Setup Steps - reset external user credentials
 
 After you have successfully completed your Quick Start project, additional setup steps are required to get Sofia Rodriguez login credentials.
 
@@ -23,6 +23,33 @@ After you have successfully completed your Quick Start project, additional setup
 1. Change users email address of Sofia Rodriguez - open **Setup > Users > Users** and change the email address from _noreply@example.com_ (or similar) to your personal email
 
 1. Reset password for Sofia - note her users credentials (username and password)
+
+#### Additional Setup Steps - metadata deployment
+
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/SFDC-Assets/agentforce-trusted-actions
+   cd agentforce-trusted-actions
+   ```
+
+1. Authorize your org with the Salesforce CLI, set it as the default org for this project and save an alias (`coral-cloud` in the command below).
+
+   ```bash
+   sf org login web -s -a coral-cloud
+   ```
+
+1. Deploy the metadata.
+
+   ```bash
+   sf project deploy start -d force-app
+   ```
+
+1. Assign the Trusted Agentforce Actions permission set to the default user.
+
+   ```bash
+   sf org assign permset -n Trusted_Agentforce_Actions
+   ```
 
 # Basic Concepts
 
