@@ -1,13 +1,23 @@
 {
-  "orgName": "tegeling company",
+  "orgName": "Agentforce Trusted Actions",
   "edition": "Developer",
-  "features": ["EnableSetPasswordInApi"],
+  "features": [
+    "EnableSetPasswordInApi",
+    "EINSTEINGPT",
+    "EINSTEINGPTPLATFORM",
+    "EINSTEINGPTPROMPTBUILDER",
+    "EINSTEINGENERATIVESERVICES",
+    "EINSTEINLLMREQUESTSHOURLY"
+  ],
   "settings": {
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true
     },
     "mobileSettings": {
       "enableS1EncryptedStoragePref2": false
+    },
+    "EinsteinGptSettings": {
+      "enableEinsteinGptPlatform": true
     }
   }
 }

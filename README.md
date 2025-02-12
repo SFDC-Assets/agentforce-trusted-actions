@@ -1,8 +1,8 @@
 # Demo project to implement trusted Agentforce actions, aka Private Actions
 
-This repository contains a sample project to show concepts of securing Agentforce Service Agents and sample implementations.
+This repository contains an extension of [Coral Cloud Resorts from Trailhead](https://trailhead.salesforce.com/content/learn/projects/quick-start-build-your-first-agent-with-agentforce) to show concepts of securing Agentforce Service Agents and sample implementations.
 
-See https://help.salesforce.com/s/articleView?language=en_US&id=service.service_agentforce_trusted_private_actions.htm&type=5 for more details.
+See [Maintain Trust with Agentforce Actions](https://help.salesforce.com/s/articleView?language=en_US&id=service.service_agentforce_trusted_private_actions.htm&type=5) for more details.
 
 # Installation
 
@@ -10,66 +10,70 @@ See https://help.salesforce.com/s/articleView?language=en_US&id=service.service_
 
 #### Environment
 
-Install [The Coral Cloud Resorts app](https://github.com/trailheadapps/coral-cloud) from Trailhead Apps.
-It contains the required licenses and features:
+Complete [Quick Start: Build Your First Agent with Agentforce](https://trailhead.salesforce.com/content/learn/projects/quick-start-build-your-first-agent-with-agentforce) on Trailhead to create a Custom Agentforce Playground containing the Coral Cloud Resorts app including a Agentforce Service Agent and Experience Cloud.
 
-- Data Cloud
-- Agents
-- Prompt Builder field generation templates
-- Einstein for Sales (for Prompt Builder sales emails)
+For more details about Coral Cloud Resorts. see [The Coral Cloud Resorts app](https://github.com/trailheadapps/coral-cloud) from Trailhead Apps.
 
-<div>
-    <img src="https://res.cloudinary.com/hy4kyit2a/f_auto,fl_lossy,q_70,w_50/learn/projects/quick-start-explore-the-coral-cloud-sample-app/1a059541a60d078109227d8f3a83404a_badge.png" align="left" alt="Trailhead Badge"/>
-    Obtain an Org with these features and learn more about the app with the <a href="https://trailhead.salesforce.com/content/learn/projects/quick-start-explore-the-coral-cloud-sample-app">Quick Start: Explore the Coral Cloud Sample App</a> Trailhead badge or by watching this <a href="https://www.youtube.com/watch?v=m1ZxPgwOHOs">short presentation video<a>.
-    <br/>
-    <br/>
-</div>
+#### Additional Setup Steps
 
-> [!IMPORTANT]
-> Start from a brand-new environment to avoid conflicts with previous work you may have done.
+After you have successfully completed your Quick Start project, additional setup steps are required to get Sofia Rodriguez login credentials.
 
-## Public Actions
+1. To create or update community users with standard profiles like _Customer Community Login User_, go to **Setup > Digital Experiences > Settings** and select `Allow using standard external profiles for self-registration, user creation, and login.` (reminder: security best practices recommend creating a custom profile).
+
+1. Change users email address of Sofia Rodriguez - open **Setup > Users > Users** and change the email address from _noreply@example.com_ (or similar) to your personal email
+
+1. Reset password for Sofia - note her users credentials (username and password)
+
+# Basic Concepts
+
+### Public Actions
 
 Taking on behalf of anyone, regardless of identity, without authentication
 
 Example:
 Answer Questions with Knowledge action could be considered a public action if it’s grounded in public information such as return policies
 
-## Private Actions
+### Private Actions
 
-Require the requester’s identity to be confirmed
-through authentication or through the sharing of identifying information in a messaging session
+Require the requester’s identity to be confirmed through authentication or through the sharing of identifying information in a messaging session
 
-## Example Implementation
+# Example Implementation using Experience Cloud as IDP
 
-In this example the user is directed to a portal page where they will authenticate to the side. This will update the MessagingSession record for the Agentforce session with the user's identity. It will not however generate an event in the Agentforce session so is dependent on the user continuing the conversation in Agentforce, once authentication is complete.
+The Coral Cloud Resorts CC Service Agent identifies customers like Sofia Rodriguez by her email address and membership number using the Flow action `Get Customer Details`.
+
+This instruction shows how to change from user identification by email and membership number to identification by authenticated users.
+
+In this example the user is directed to a portal page where they will authenticate as external user via a login screen. A screen flow _Agentforce Authenticator_ is shown and after completion it will update the MessagingSession record for the Agentforce session with the user's identity. It will not however generate an event in the Agentforce session so it is dependent on the user continuing the conversation in Agentforce, once authentication is complete.
 ![Example Implementation .](/images/service_agentforce_flow_chart.png)
-
-# Example Implementation Using IDP
-
-How to setup and configure secure Agentforce Service Agents
 
 ## Use Case
 
-- Topic related to Case Management
-- Answers “What is the status of my support case?”
-- Custom Agent Actions using Flows
-- Service Agent deployed via enhanced Messaging channels
-- Deployed to an Experience site
+- Topic **Experience Management**
+- Actions like **Generate Personalized Schedule** or **Create Experience Session Booking** require a Contact record as input - they can be classified as Private Actions
+- Instead of retrieving a contact by email and membership number, get the contact related to an authenticated user
 
 ## Topic Setup
 
-Customize Standard Topic _CaseManagement_
+Customize topic **Experience Management**
 
 Replace this instruction (or optionally remove):
 
-`If the customer is not known, always ask for their email address and get their Contact record before running any other actions.`
+```
+If the customer is not known, always ask for their email address and get their Contact record before running any other actions.`
+```
 
 With this:
 
-`If the customer is not known, call the action 'Identify Customer by Messaging Session'.`
+```
+If the customer is not known, call the action 'Identify Customer by Messaging Session'.`
+```
 
-## Identify Customer By Messaging Session
+## Get Customer Details
+
+The default implementation of **Get Customer Details** is a flow that retrieves a Contact record by email and membership number.
+![Get Customer Details V1](/images/get_customer_details_v1.png)
+
+Replace this flow with a new version that checks, if the current agent context in Messaging Session is linked with an authorized session.
 
 Check Authentication Status using the Custom AuthSessionId on Messaging Session
 
