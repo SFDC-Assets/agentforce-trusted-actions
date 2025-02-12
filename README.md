@@ -73,7 +73,7 @@ If the customer is not known, call the action 'Identify Customer by Messaging Se
 The default implementation of **Get Customer Details** is a flow that retrieves a Contact record by email and membership number.
 ![Get Customer Details V1](/images/get_customer_details_v1.png)
 
-Replace this flow with a new version that checks, if the current agent context in Messaging Session is linked with an authorized session.
+Replace this flow with a new version that retrieves the contact related to an authorized external user.
 
 Check Authentication Status using the Custom AuthSessionId on Messaging Session
 
