@@ -95,7 +95,7 @@ With this:
 If the customer is not known, call the action 'Get Customer Details by Messaging Session'.
 ```
 
-1. Replace:
+2. Replace:
 
 ```
 If asked to recommend experiences that a user might be interested in, use the 'Generate Personalized Schedule' Action to generate a schedule based on a contacts interests. Use the contact record from 'Get Customer Details' and pass it into the Contact input.
@@ -112,15 +112,16 @@ If asked to recommend experiences that a user might be interested in, use the 'G
 The default implementation of **Get Customer Details** is a flow that retrieves a Contact record by email and membership number.
 ![Get Customer Details](/images/get_customer_details.png)
 
-This project adds a new flow `Get Customer Details by Messaging Session`that retrieves the contact related to an authorized external user.
+This project adds a new flow **Get Customer Details by Messaging Session** that retrieves the contact related to an authorized external user.
 ![Get Customer Details by Messaging Session](/images/get_customer_details_by_messaging_session.png)
 
 #### Flow Details
 
 The flow checks if the Messaging Session has an Auth Session linked and if yes, it returns the linked Contact.
 If the Auth Session is missing, it updates the Messaging Session with the AuthRequestTime and returns an external link as URL to an authentication form - passing the current Session Key as URL parameter.
-Please modify the flow constant `SITE_URL` and set your URL from your org (like `https://orgfarm-60873dacf4-dev-ed.develop.my.site.com/coralcloud`)
-![Edit SITE URL flow constant](/images/get_customer_details_by_messaging_session_site_url.png)
+
+> [!IMPORTANT]
+> Please modify the flow constant `SITE_URL` and set your URL from your org (like `https://orgfarm-60873dacf4-dev-ed.develop.my.site.com/coralcloud`)
 
 #### Add new Agent Action
 
@@ -130,6 +131,6 @@ Deactivate your CC Service Agent and remove `Get Customer Details` from the topi
 Add a new flow action using `Get Customer Details by Messaging Session` with Input `messagingSessionId` marked as **Require Input** and Outputs `authenticationURL`, `contact` and `status` marked as **Show in conversation**
 
 The new action will show a URL link to a login protected page on your Experience Cloud.
-![Agent Authentication URL](/images/cc_service_agent_authenticate_url.png)
+![Agent Authentication URL](/images/authenticate.png)
 
 ## Agentforce Authenticator
