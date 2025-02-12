@@ -134,3 +134,14 @@ The new action will show a URL link to a login protected page on your Experience
 ![Agent Authentication URL](/images/authenticate.png)
 
 ## Agentforce Authenticator
+
+This project contains a new screen flow **Authenticate Agentforce Service Agent** that is used to retrieve contact details from an authorized user.
+The flow will be added to your Experience Cloud using Builder with a new login-protected custom page and a screen flow component.
+
+![Authenticate Agentforce Service Agent](/images/authenticate_agentforce_service_agent.png)
+
+In **Experience Builder** add a new **Standard Page > New Blank Page** and name it `AgentAuthenticator`. Set **Page Access** to **Requires Login**.
+
+Add a flow component to the new page and change the settings to Flow = `Authenticate Agentforce Service Agent` and sessionKey = `{!sessionKey}`
+
+![AgentAuthenticator settings](/images/agent_authenticator.png)
