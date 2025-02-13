@@ -85,29 +85,10 @@ In this example the user is directed to a portal page where they will authentica
 
 Customize topic **Experience Management** and replace the following two instructions:
 
-1. Replace:
-
-```
-If the customer is not known, you must always ask for their email address and their membership number to get their Contact record by running the action 'Get Customer Details' before running any other actions.
-```
-
-With this:
-
-```
-If the customer is not known, call the action 'Get Customer Details by Messaging Session'.
-```
-
-2. Replace:
-
-```
-If asked to recommend experiences that a user might be interested in, use the 'Generate Personalized Schedule' Action to generate a schedule based on a contacts interests. Use the contact record from 'Get Customer Details' and pass it into the Contact input.
-```
-
-With this:
-
-```
-If asked to recommend experiences that a user might be interested in, use the 'Generate Personalized Schedule' Action to generate a schedule based on a contacts interests. Use the contact record from 'Get Customer Details by Messaging Session' and pass it into the Contact input.
-```
+| Old Action Instruction                                                                                                                                                                                                                                                | New Action Instruction                                                                                                                                                                                                                                                                     |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `If the customer is not known, you must always ask for their email address and their membership number to get their Contact record by running the action 'Get Customer Details' before running any other actions.`                                                    | `If the customer is not known, call the action 'Get Customer Details by Messaging Session'.`                                                                                                                                                                                               |
+| ` If asked to recommend experiences that a user might be interested in, use the 'Generate Personalized Schedule' Action to generate a schedule based on a contacts interests. Use the contact record from 'Get Customer Details' and pass it into the Contact input.` | ` If asked to recommend experiences that a user might be interested in, use the 'Generate Personalized Schedule' Action to generate a schedule based on a contacts interests. Use the contact record from 'Get Customer Details by Messaging Session' and pass it into the Contact input.` |
 
 ## Get Customer Details
 
