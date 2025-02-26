@@ -57,7 +57,7 @@
         <dataType>String</dataType>
         <value>
             <stringValue
-      >https://orgfarm-60873dacf4-dev-ed.develop.my.site.com/coralcloud</stringValue>
+      >https://orgfarm-b1d2971b6f-dev-ed.develop.my.site.com/coralcloud</stringValue>
         </value>
     </constants>
     <decisions>
@@ -131,7 +131,7 @@
             <operator>EqualTo</operator>
             <value>
                 <elementReference
-        >Get_Messaging_Session.ContactId__c</elementReference>
+        >Get_Messaging_Session.EndUserContactId</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>

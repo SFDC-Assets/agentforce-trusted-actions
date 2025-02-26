@@ -4,7 +4,7 @@
         <name>Get_AuthSessionId</name>
         <label>Get AuthSessionId</label>
         <locationX>50</locationX>
-        <locationY>458</locationY>
+        <locationY>566</locationY>
         <actionName>AgentAuthenticator</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -14,28 +14,13 @@
         <nameSegment>AgentAuthenticator</nameSegment>
         <offset>0</offset>
         <storeOutputAutomatically>true</storeOutputAutomatically>
-        <versionSegment>1</versionSegment>
     </actionCalls>
     <apiVersion>62.0</apiVersion>
     <assignments>
         <name>Set_Messaging_Session_Details</name>
         <label>Set Messaging Session Details</label>
         <locationX>50</locationX>
-        <locationY>566</locationY>
-        <assignmentItems>
-            <assignToReference>messagingSession.AccountId__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Get_Current_User.AccountId</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>messagingSession.ContactId__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Get_Current_User.ContactId</elementReference>
-            </value>
-        </assignmentItems>
+        <locationY>674</locationY>
         <assignmentItems>
             <assignToReference
       >messagingSession.AuthSessionId__c</assignToReference>
@@ -43,6 +28,20 @@
             <value>
                 <elementReference
         >Get_AuthSessionId.authSessionId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>messagingEndUser.AccountId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Current_User.AccountId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>messagingEndUser.ContactId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Current_User.ContactId</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -53,7 +52,7 @@
         <name>Check_Messaging_Session_and_Authentication</name>
         <label>Check Messaging Session and Authentication</label>
         <locationX>314</locationX>
-        <locationY>350</locationY>
+        <locationY>458</locationY>
         <defaultConnector>
             <targetReference>screen3</targetReference>
         </defaultConnector>
@@ -131,7 +130,7 @@
         <name>Get_Current_User</name>
         <label>Get Current User</label>
         <locationX>314</locationX>
-        <locationY>242</locationY>
+        <locationY>350</locationY>
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -158,7 +157,7 @@
         <assignNullValuesIfNoRecordsFound
     >false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Get_Current_User</targetReference>
+            <targetReference>Get_Messaging_User</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -201,32 +200,66 @@
         <queriedFields>Id</queriedFields>
         <queriedFields>AuthSessionId__c</queriedFields>
         <queriedFields>AuthRequestTime__c</queriedFields>
-        <queriedFields>AccountId__c</queriedFields>
-        <queriedFields>ContactId__c</queriedFields>
+        <queriedFields>MessagingEndUserId</queriedFields>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Messaging_User</name>
+        <label>Get Messaging User</label>
+        <locationX>314</locationX>
+        <locationY>242</locationY>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Current_User</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference
+        >messagingSession.MessagingEndUserId</elementReference>
+            </value>
+        </filters>
+        <object>MessagingEndUser</object>
+        <outputReference>messagingEndUser</outputReference>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>AccountId</queriedFields>
+        <queriedFields>ContactId</queriedFields>
     </recordLookups>
     <recordUpdates>
         <name>Update_Messaging_Session</name>
         <label>Update Messaging Session</label>
         <locationX>50</locationX>
-        <locationY>674</locationY>
+        <locationY>782</locationY>
+        <connector>
+            <targetReference>Update_Messaging_User</targetReference>
+        </connector>
+        <inputReference>messagingSession</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Update_Messaging_User</name>
+        <label>Update Messaging User</label>
+        <locationX>50</locationX>
+        <locationY>890</locationY>
         <connector>
             <targetReference>screen1</targetReference>
         </connector>
-        <inputReference>messagingSession</inputReference>
+        <inputReference>messagingEndUser</inputReference>
     </recordUpdates>
     <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>screen1</name>
         <label>Show Messaging Session Details</label>
         <locationX>50</locationX>
-        <locationY>782</locationY>
+        <locationY>998</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>msg1</name>
             <fieldText
-      >&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;You have successfully authenticated your  Agentforce Service Agent!&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;Please close this tab and return to your Agent.&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;Confirm your authentication with &quot;&lt;/span&gt;&lt;strong style=&quot;font-size: 24px;&quot;&gt;Done&lt;/strong&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;&quot;!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;SessionKey is &lt;strong&gt;{!sessionKey}&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;AccountId is &lt;strong&gt;{!Get_Current_User.AccountId}&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;ContactId is &lt;strong&gt;{!Get_Current_User.ContactId}&lt;/strong&gt;&lt;/p&gt;</fieldText>
+      >&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;You have successfully authenticated your  Agentforce Service Agent!&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;Please close this tab and return to your Agent.&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;Confirm your authentication with &quot;&lt;/span&gt;&lt;strong style=&quot;font-size: 24px;&quot;&gt;Done&lt;/strong&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;&quot;!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;SessionKey is &lt;strong&gt;{!sessionKey}&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;AccountId is &lt;strong&gt;{!messagingEndUser.AccountId}&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;ContactId is &lt;strong&gt;{!messagingEndUser.ContactId}&lt;/strong&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>false</showFooter>
@@ -236,14 +269,14 @@
         <name>screen2</name>
         <label>Authentication Required</label>
         <locationX>314</locationX>
-        <locationY>458</locationY>
+        <locationY>566</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <fields>
             <name>msg2_1</name>
             <fieldText
-      >&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;You are currently not authenticated. &lt;/span&gt;&lt;a href=&quot;https://storm-538064fbfa5715.my.site.com/professional/s/login&quot; rel=&quot;noopener noreferrer&quot; target=&quot;_blank&quot; style=&quot;font-size: 24px;&quot;&gt;Click here to login&lt;/a&gt;&lt;/p&gt;</fieldText>
+      >&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;You are currently not authenticated. Click here to login&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>false</showFooter>
@@ -253,7 +286,7 @@
         <name>screen3</name>
         <label>Session Key is Invalid</label>
         <locationX>578</locationX>
-        <locationY>458</locationY>
+        <locationY>566</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -274,6 +307,14 @@
         </connector>
     </start>
     <status>Active</status>
+    <variables>
+        <name>messagingEndUser</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>MessagingEndUser</objectType>
+    </variables>
     <variables>
         <name>messagingSession</name>
         <dataType>SObject</dataType>
