@@ -4,11 +4,6 @@
   >Custom permission set required for the Trusted Agentforce Actions setup</description>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MessagingSession.AccountId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>MessagingSession.AuthRequestTime__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -20,11 +15,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>MessagingSession.CaseId</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>MessagingSession.ContactId__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
