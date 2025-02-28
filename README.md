@@ -1,6 +1,6 @@
 # Demo project to implement trusted Agentforce actions, aka Private Actions
 
-This repository contains an extension of [Coral Cloud Resorts from Trailhead](https://trailhead.salesforce.com/content/learn/projects/quick-start-build-your-first-agent-with-agentforce) to show concepts of securing Agentforce Service Agents and sample implementations.
+This repository contains an extension of [Coral Cloud Resorts from Trailhead](https://trailhead.salesforce.com/content/learn/projects/quick-start-build-your-first-agent-with-agentforce) to show concepts of securing Agentforce Service Agents and a sample implementation.
 
 See [Maintain Trust with Agentforce Actions](https://help.salesforce.com/s/articleView?language=en_US&id=service.service_agentforce_trusted_private_actions.htm&type=5) for more details.
 
